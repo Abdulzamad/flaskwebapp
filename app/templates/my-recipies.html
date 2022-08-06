@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='all.css') }}">
+        <style>
+            *{font-family: 'Rubik', sans-serif;}
+        </style>
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        
+        <div class="mt-4 ">
+            <h2 class="text-5xl text-center uppercase font-bold text-gray-800 p-4"> 
+                {{user.username}}'s Recipies
+            </h2>
+        
+        </div>
+        <form class="mt-4 bg-gray-100 shadow flex justify-around items-center mx-auto max-w-4xl my-3">
+            
+        <input class="w-full border text-lg border mx-2 p-2" type="search" placeholder=" Search Query" name="query" /><button type="submit" class="bg-blue-900 p-2 text-white mx-2   text-lg">Go</button>
+        </form>
+        <div class="text-center">
+            {% if query != "" %}
+            <p class="text-lg font-bold">Results for "{{ query }}"</p>
+            {% endif %}
+            {% if recipes.__len__() == 0 %}
+            <p class="text-xl">Nothing Found</p>
+            {% endif %}
+
+        </div>
+        <div class="p-2 flex flex-wrap justify-between items-center">
+            
+            
+            {% for recipe in recipes %}
+            <div class="p-2">
+                <div class="block p-6 max-w-xl shrink-0 rounded-sm border border-gray-200  hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{{ recipe.title }}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">{{ recipe.description }}</p>
+                    <p class="py-4"><a href="{{url_for('recipe', recipe_id = recipe.id) }}" class="mt-2 text-blue-600 border border-blue p-2 rounded-sm">Read Now</a> <a href="{{url_for('editPost', recipe_id = recipe.id) }}" class="mt-2 rounded-sm text-gray-50 bg-blue-600 p-2 mx-2 ">Edit</a><a href="{{url_for('editPost', recipe_id = recipe.id) }}" class="mt-2 rounded-sm text-gray-50 bg-red-600 p-2 mx-2 ">Delete</a></p>
+                </div>
+            </div>
+            <!-- <li><a href="{{url_for('recipe', recipe_id = recipe.id) }}">{{ recipe.title }}</a></li> -->
+            {% endfor %}
+        </div>
+        {% include "footer.html" %}
+        
+        </div>
+        
+    </body>
+</html>

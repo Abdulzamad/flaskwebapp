@@ -1,0 +1,44 @@
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='all.css') }}">
+        <style>
+            *{font-family: 'Rubik', sans-serif;}
+        </style>
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <section  class="section py-20 has-background-dark is-clipped">
+           
+            <div class="max-w-4xl px-4  mx-auto py-12">
+              <span class="text-gray-700 text-sm" data-config-id="label">#{{ recipe.tags.replace("," , " #") }}</span>
+              <h1 class="font-bold text-5xl mt-2 mb-4" data-config-id="title">{{ recipe.title }}</h1>
+              <div class="has-mw-3xl py-3 mx-auto">
+                
+                <p class="text-lg font-medium text-gray-800">{{ recipe.description }}</p>
+              </div>
+            </div>
+
+            <div class="max-w-4xl px-4 bg-blue-50 mx-auto py-16">
+              
+              
+              <div class="has-mw-3xl py-6 mx-auto">
+                <h4 class="text-3xl font-bold text-gray-700">Ingredients</h4>
+                <p class="text-lg font-medium whitespace-pre-wrap text-gray-800">{{ recipe.ingredients }}</p>
+              </div>
+              <div class="has-mw-3xl py-6 mx-auto">
+                <h4 class="text-3xl font-bold text-gray-700">Instructions</h4>
+                <p class="text-lg font-medium whitespace-pre-wrap text-gray-800">{{ recipe.instructions }}</p>
+              </div>
+
+
+            </div>
+          </section>
+        {% include "footer.html" %}
+    </body>
+</html>
+

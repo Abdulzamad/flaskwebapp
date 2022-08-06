@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='all.css') }}">
+        <style>
+            *{font-family: 'Rubik', sans-serif;}
+        </style>
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <div class="max-w-sm mx-auto text-center shadow my-16 py-6 px-2">
+            <h1 class="w-full font-bold text-5xl mb-6">Register</h1>
+            <form action="" class="w-full" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div  >
+
+                    <div class=" mb-4 w-full text-gray-800  ">
+                        <div class="mr-2 w-full text-lg text-left" >{{ form.first_name.label }}</div>
+                        <div class="border w-full text-2xl">{{ form.first_name() }}</div>
+                    </div>
+                    {% for error in form.first_name.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div  >
+
+                    <div class=" mb-4 w-full text-gray-800  ">
+                        <div class="mr-2 w-full text-lg text-left" >{{ form.last_name.label }}</div>
+                        <div class="border w-full text-2xl">{{ form.last_name() }}</div>
+                    </div>
+                    {% for error in form.last_name.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div  >
+
+                    <div class=" mb-4 w-full text-gray-800  ">
+                        <div class="mr-2 w-full text-lg text-left" >{{ form.email.label }}</div>
+                        <div class="border w-full text-2xl">{{ form.email() }}</div>
+                    </div>
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div  >
+
+                    <div class=" mb-4 w-full text-gray-800  ">
+                        <div class="mr-2 w-full text-lg text-left" >{{ form.username.label }}</div>
+                        <div class="border w-full text-2xl">{{ form.username() }}</div>
+                    </div>
+                    {% for error in form.username.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div >
+
+                    <div class=" mb-4 w-full text-gray-800  ">
+                        <div class="mr-2 w-full text-lg text-left" >{{ form.password.label }}</div>
+                        <div class="border w-full text-2xl"> {{ form.password() }}</div>
+                    </div>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div >
+
+                    <div class=" mb-4 w-full text-gray-800  ">
+                        <div class="mr-2 w-full text-lg text-left" >{{ form.password_confirm.label }}</div>
+                        <div class="border w-full text-2xl"> {{ form.password_confirm() }}</div>
+                    </div>
+                    {% for error in form.password_confirm.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+               
+                
+                <div class=" hidden">
+                    {{ form.submit(class_='btn btn-success') }}
+                    
+                </div>
+                <button type="submit" class="bg-blue-900 text-white w-full p-2">Login</button>
+            </form>
+            <div class="text-lg text-gray-700">
+                Already have account ? <a class="btn btn-primary" href="{{ url_for('login') }}">Login</a>
+            </div>
+        </div>
+          {% include "footer.html" %}
+    </body>
+</html>

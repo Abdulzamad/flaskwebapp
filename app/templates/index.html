@@ -1,0 +1,36 @@
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='all.css') }}">
+        <style>
+            *{font-family: 'Rubik', sans-serif;}
+        </style>
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <div class="relative  bg-cover bg-blue-900 bg-no-repeat bg-center">
+            <img class="hidden xl:block absolute top-0 right-0 h-full w-1/2 object-cover" src="https://source.unsplash.com/random/900×700/?chef" alt="" data-config-id="auto-img-2-2">
+            <div class="relative container px-4 mx-auto">
+              <div class="w-full xl:w-1/2 px-4 pt-20 pb-14">
+                <div class="max-w-md xl:max-w-lg mx-auto xl:mx-0">
+                  <div class="text-sm mb-2 font-semibold text-white uppercase">
+                    <span data-config-id="auto-txt-6-2">Your Cooking </span>
+                    <span class="text-blue-500" data-config-id="auto-txt-7-2">Our Reciepies</span>
+                  </div>
+                  <h1 class="font-bold text-4xl xl:text-5xl text-white mb-6" data-config-id="auto-txt-8-2">Become MasterChef Of Your Kitchen With CookBook</h1>
+                  <p class="text-lg leading-8 text-white mb-10" data-config-id="auto-txt-9-2">Lets cook with passion . Enjoy cooking. Get deliciouse recipies. </p>
+                  <div class="sm:flex items-center mb-18"><a class="inline-block w-full sm:w-auto py-4 px-6 mb-4 sm:mb-0 sm:mr-4 text-center font-heading font-medium text-base text-white bg-blue-500 hover:bg-blue-600 border border-blue-500 hover:border-blue-600 rounded-sm transition duration-200" href="/recipes" data-config-id="auto-txt-10-2">Explore Recipies</a></div>
+                  
+                </div>
+              </div>
+            </div>
+            <img class="block w-full xl:hidden object-cover" src="https://source.unsplash.com/random/200×200/?chef" alt="" data-config-id="auto-img-6-2">
+          </div>
+          {% include "random.html" %}
+          {% include "footer.html" %}
+    </body>
+</html>
