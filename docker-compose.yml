@@ -3,6 +3,7 @@ version: '3.3'
 services:
   web:
     build: ./
+    image: cookbook
     command: flask run
     volumes:
       - ./:/usr/src/app/
