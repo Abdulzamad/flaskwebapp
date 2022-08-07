@@ -1,28 +1,32 @@
 pipeline {
     agent any
     stages {
-        stage('test-build') {
+        stage('stup') {
                 steps {
+                        sh "echo setting up env"
                         cleanWs()
                         git branch: 'main', url: 'https://github.com/Abdulzamad/flaskwebapp'
-                        sshagent(credentials: ['docker-manager'], ignoreMissing: true) {
-                            sh "whoami && pwd"
-                            sh "echo 'Build Making For Test'"
-                            
-                        }
-                        
-                    
                 }
             }
         stage('test') {
                 steps {
                     
-                        sshagent(credentials: ['docker-manager'], ignoreMissing: true) {
-                            
+                        
+                        try{
+                            sh "echo 'Setting up Tests'"
+                            sh "python3 -m venv .py"
+                        }catch (err){
+                            skipRemainingStages = true
+                            sh "echo 'Test Env Setup Failure' && exit 1 "
+                        }
+                        try{
                             sh "echo 'Running Tests'"
+                            sh "source .py/bin/activate && pytest -v || echo 'Dropping steps due to test failed' && exit 0 "
+                        }catch (err){
+                            skipRemainingStages = true
+                            sh "echo 'Test Running Failure' && exit 1 "
                         }
                         
-                    
                 }
             
         }
