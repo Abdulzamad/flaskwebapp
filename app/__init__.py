@@ -1,4 +1,9 @@
+from pyexpat import model
 from flask import Flask
+from flask_admin import Admin
+from app.admin  import AdminView
+
+
 from app.settings import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,3 +21,8 @@ login.login_view = 'login'
 bootstrap = Bootstrap(app)
 
 from app import routes, models, errors
+
+
+admin = Admin(app, name='Dashboard')
+admin.add_view(AdminView(models.User, db.session))
+admin.add_view(AdminView(models.Recipe, db.session))

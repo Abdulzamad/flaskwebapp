@@ -1,10 +1,26 @@
-from flask import render_template, flash, redirect, url_for, request
+from crypt import methods
+from flask import render_template, flash, redirect, url_for, request , session
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
 from app.forms import LoginForm, RegistrationForm , UserUpdateForm
 from app.models import User, Recipe
 from werkzeug.urls import url_parse
 import random
+
+@app.route('/mysite-admin' , methods=['GET' , 'POST'])
+def adminLogin():
+    if request.method == "POST":
+        if current_user.is_authenticated:
+            if current_user.role == "admin":
+                session.cook_admin = "yes"
+                redirect("/admin")
+
+        else:
+            redirect("/")
+            
+    return "<form method='post'> <input type='submit' value='go admin'></form>"
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -14,7 +30,10 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
+            if user.role == "admin":
+                session["cook_admin"]="yes"
             flash('Invalid username or password')
+
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -44,6 +63,7 @@ def profile():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
     if current_user.is_authenticated:
         return redirect("/my-recipes")
     form = RegistrationForm()
