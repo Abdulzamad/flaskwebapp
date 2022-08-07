@@ -21,7 +21,7 @@ pipeline {
                         }
                         try{
                             sh "echo 'Running Tests'"
-                            sh "source .py/bin/activate && pytest -v "
+                            sh "./.py/bin/python -m pytest -v "
                         }catch (err){
                             skipRemainingStages = true
                             sh "echo 'Test Running Failure' && exit 1 "
