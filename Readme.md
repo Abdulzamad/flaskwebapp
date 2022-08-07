@@ -1,5 +1,6 @@
 # CookBook
 ## A WebBased Cooking Receipe Library / Catlog
+![My animated logo](images/app.png)
 CookBook is a cloud-enabled, CI/CD Integrated and higly scalable
 A Cook Reciepe Web App Build with Python [ flask ] And html , css and js 
 - Read Reciepies from community
@@ -71,7 +72,13 @@ your preferred browser.
 
 You can easily deploy it with docker swarm and jenkins
 
-
+- Create you swarm manager
+- Join your swarm network from all worker nodes
+- Now come back to Jenkins dashboard 
+- Create a new task in jenkins and add new task 
+- Use ```jenkinsfile``` as a jenkin pipeline script.
+- Save 
+- Run Build 
 ## License
 
 
