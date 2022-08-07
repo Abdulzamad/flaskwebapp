@@ -5,8 +5,6 @@ services:
     build: ./
     image: abdulzamad/cookbook
     command: flask run
-    volumes:
-      - ./:/usr/src/app/
     ports:
       - 5000:5000
     env_file:
