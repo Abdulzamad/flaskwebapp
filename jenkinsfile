@@ -13,7 +13,7 @@ pipeline {
                 steps {
                         sh "echo Setting up env"
                         cleanWs()
-                        git branch: 'main', url: 'https://github.com/Abdulzamad/flaskwebapp'
+                        git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/Abdulzamad/flaskwebapp'
                 }
             }
         stage('Test') {
