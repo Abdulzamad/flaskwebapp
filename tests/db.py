@@ -12,6 +12,11 @@ def load_env():
 # minimal checkup if website is working or not 
 def test_db_connectivity():
     # sample query running
-    assert True if Recipe.query.all() else False
-    assert True if User.query.all() else False 
+    try:
+        Recipe.query.all()
+        User.query.all()
+        assert True
+    except Exception as e:
+        
+        assert False
     
