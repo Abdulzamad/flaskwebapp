@@ -15,6 +15,5 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . /usr/src/app/
-RUN flask db init 
-RUN flask db migrate 
+
 RUN flask db upgrade
