@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+    stages {
+        stage('test-build') {
+                steps {
+                        cleanWs()
+                        git branch: 'main', url: 'https://github.com/Abdulzamad/flaskwebapp'
+                        sshagent(credentials: ['docker-manager'], ignoreMissing: true) {
+                            sh "whoami && pwd"
+                            sh "echo 'Build Making For Test'"
+                            
+                        }
+                        
+                    
+                }
+            }
+        stage('test') {
+                steps {
+                    
+                        sshagent(credentials: ['docker-manager'], ignoreMissing: true) {
+                            
+                            sh "echo 'Running Tests'"
+                        }
+                        
+                    
+                }
+            
+        }
+        stage('build') {
+                
+                steps {
+                    
+                        
+                            
+                            sh "echo 'Building Image'"
+                            sh "docker-compose build"
+                            sh "docker-compose push"
+                            
+                        
+                        
+                    
+                }
+        }
+        stage('deploy') {
+                
+                steps {
+                    
+                        sshagent(credentials: ['docker-manager'], ignoreMissing: true) {
+                            sh "scp -o StrictHostKeyChecking=no  ./docker-compose.yml azureuser@10.0.0.5:~/flaskweb-compose.yml"
+                            sh "scp -o StrictHostKeyChecking=no  ./.env azureuser@10.0.0.5:~/.env"
+                            sh "ssh -o StrictHostKeyChecking=no -l azureuser 10.0.0.5 'sudo docker stack deploy --compose-file ~/flaskweb-compose.yml vossibility'"
+                            
+                            
+                        }
+                        
+                    
+                }
+                
+            
+        }
+        
+    }
+}
