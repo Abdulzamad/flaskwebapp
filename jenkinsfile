@@ -28,7 +28,7 @@ pipeline {
                         }
                         try{
                             sh "echo 'Running Tests'"
-                            sh "./.py/bin/python -m pip install -r requirements.txt && ./.py/bin/python -m db upgrade && ./.py/bin/python -m pytest -v "
+                            sh "./.py/bin/python -m pip install -r requirements.txt && ./.py/bin/python -m flask db upgrade && ./.py/bin/python -m pytest -v "
                         }catch (err){
                             skipRemainingStages = true
                             sh "echo 'Test Running Failure' && exit 1 "
