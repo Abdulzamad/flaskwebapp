@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy.sql.expression import func
 from app import app, db
 from app.forms import AddRecipieForm
 from app.models import User, Recipe
@@ -10,8 +11,9 @@ import re
 @app.route('/')
 @app.route('/index')
 def index():
-    # random_recipe = Recipe.query.get(random.randint(1,2))
-    return render_template('index.html' , user=current_user)
+    random_recipes =  Recipe.query.order_by(func.rand()).all()[:3]
+    print(random_recipes)
+    return render_template('index.html' ,random_recipes=random_recipes, user=current_user)
 
 @app.route('/recipes')
 def recipes():
