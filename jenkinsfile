@@ -1,16 +1,23 @@
+
+
+
 pipeline {
+    environment {
+        imagename = "abdulzamad/cookbook"
+        registryCredential = 'docker-regestry'
+        dockerImage = ''
+    }
     agent any
     stages {
-        stage('stup') {
+        stage('Setup') {
                 steps {
-                        sh "echo setting up env"
+                        sh "echo Setting up env"
                         cleanWs()
                         git branch: 'main', url: 'https://github.com/Abdulzamad/flaskwebapp'
                 }
             }
-        stage('test') {
+        stage('Test') {
                 steps {
-                    
                     script {
                         try{
                             sh "echo 'Setting up Tests'"
@@ -31,25 +38,25 @@ pipeline {
                 }
             
         }
-        stage('build') {
+        stage('Build') {
                 
                 steps {
-                    
-                        
-                            
-                            sh "echo 'Building Image'"
-                            sh "docker-compose build"
-                            sh "docker-compose push"
-                            
-                        
-                        
+                    script {
+                        dockerImage = docker.build imagename
+                    }
                     
                 }
         }
-        stage('deploy') {
+        stage('Deploy') {
                 
                 steps {
-                    
+                        script {
+                            docker.withRegistry('', registryCredential) {     
+                                dockerImage.push("$BUILD_NUMBER")
+                                dockerImage.push('latest')
+
+                            }
+                        }
                         sshagent(credentials: ['docker-manager'], ignoreMissing: true) {
                             sh "scp -o StrictHostKeyChecking=no  ./docker-compose.yml azureuser@10.0.0.5:~/flaskweb-compose.yml"
                             sh "scp -o StrictHostKeyChecking=no  ./.env azureuser@10.0.0.5:~/.env"
@@ -62,6 +69,13 @@ pipeline {
                 }
                 
             
+        }
+        stage('Remove Unused docker image - Master') {
+            
+            steps{
+                sh "docker rmi $imagename:$BUILD_NUMBER"
+                sh "docker rmi $imagename:latest"
+            }
         }
         
     }
