@@ -11,7 +11,7 @@ pipeline {
         stage('test') {
                 steps {
                     
-                        
+                    script {
                         try{
                             sh "echo 'Setting up Tests'"
                             sh "python3 -m venv .py"
@@ -26,6 +26,7 @@ pipeline {
                             skipRemainingStages = true
                             sh "echo 'Test Running Failure' && exit 1 "
                         }
+                    }
                         
                 }
             
