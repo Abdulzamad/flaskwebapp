@@ -80,6 +80,12 @@ You can easily deploy it with docker swarm and jenkins
 - Save 
 - Run Build 
 ## License
+The unit tests had to be edited several times to perfect it with an overall success once all the debugging issues were complete.
+
+
+And future improvements I would do is;
+
+Adds some more detail and objects that help make creating the recipes more interactive and fun. 
 
 
 MIT
