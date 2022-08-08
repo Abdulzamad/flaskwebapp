@@ -2,7 +2,7 @@
 ## A WebBased Cooking Receipe Library / Catlog
 ![My animated logo](images/app.png)
 CookBook is a cloud-enabled, CI/CD Integrated and higly scalable
-A Cook Reciepe Web App Build with Python [ flask ] And html , css and js 
+ Cook Reciepe Web App Build with Python [ flask ] And html , css and js 
 - Read Reciepies from community
 - Share your reciepies to community
 - ✨ And Enjoy your cooking ✨
@@ -24,23 +24,23 @@ CookBook Uses Some of opensource techs to manage it
 
 ### Some of techs in infrastructure
 CookBook uses CI/CD Pipeline with integrating Technologis like
-- Github -  To Manage Sorce Code 
+- Github -  To Manage Source Code 
 - Jenkins - To Create and manage CI/CD pipeline
 - Docker (Docker Swarm) - To manage deployment on multiple node integrations
-- Docker Hub - To manage docker buit images
+- Docker Hub - To manage docker built images
 ## Installation
 
 
 
 Clone the repository
 
-CookBook is Depended on python-3.8 . so Make sure you have it.
+CookBook uses python-3.8 . Make sure you have it.
 ```sh
 git clone https://github.com/Abdulzamad/flaskwebapp
 ```
 
 ### For Normal Usage
-Create vertual envirnment and Activate it 
+Create virtual envirnment and Activate it 
 ```sh
 cd flaskwebapp
 python -m venv .venv
@@ -55,7 +55,7 @@ Test Your Installation
 pytest -v
 ```
 
-### Building  With docker-compose
+### Build  With docker-compose
 
 ```sh
 cd flaskwebapp
@@ -84,4 +84,4 @@ You can easily deploy it with docker swarm and jenkins
 
 MIT
 
-**Free Software, Hell Yeah!**
+**Made easy right?!**
